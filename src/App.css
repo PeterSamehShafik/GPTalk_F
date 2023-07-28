@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+* {
+    font-family: 'Roboto Mono', monospace;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+    color: inherit !important;
+    text-decoration: none !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+::-webkit-scrollbar-corner {
+    background: rgba(131, 131, 131, 0.5);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(131, 131, 131, 0.5);
 }
 
-.App-link {
-  color: #61dafb;
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+*::-webkit-scrollbar-track {
+    background: rgba(131, 131, 131, 0.5);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #296EFF;
+    border-radius: 20px;
+    border: 3px solid rgba(131, 131, 131, 0.5);
+}
+
+
+.col-11-half {
+    width: 85%;
+    
+}
+
+.col-half {
+    width: 15%;
+    border-right: 1px #296EFF solid !important;
+}
+
+@media (min-width: 576px) {
+    .col-11-half {
+        width: 90%;
+    }
+
+    .col-half {
+        width: 10%;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .col-11-half {
+        width: 95%;
+    }
+
+    .col-half {
+        width: 5%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-11-half {
+        width: 94%;
+    }
+
+    .col-half {
+        width: 6%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-11-half {
+        width: 95%;
+    }
+
+    .col-half {
+        width: 5%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .col-11-half {
+        width: 95%;
+    }
+
+    .col-half {
+        width: 5%;
+    }
 }

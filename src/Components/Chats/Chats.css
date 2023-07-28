@@ -1,0 +1,59 @@
+.chats{
+  height: 100vh;
+  font-size: small;
+  overflow: hidden;
+}
+.chats-view{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.chats .form-control {
+  border-color: transparent !important;
+  border: none !important;
+}
+
+.chats .input-group>.form-control:focus {
+  border-color: transparent !important;
+  border: none !important;
+  box-shadow: inset 0 0 0 1px transparent !important;
+}
+
+.chats .input-group ::placeholder{
+    color: gray !important;
+}
+
+
+.chats .single-chat{
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.chats .single-chat:hover{
+  /* opacity: 50%; */
+  background-color: grey;
+}
+
+.chats .new-msg{
+  background-color: red;
+  font-size: 0.5rem;
+  color: white !important;
+}
+
+.light-mode .msg-txt{
+  color: #296EFF !important;
+}
+.dark-mode .msg-txt{
+  color: #fff !important;
+}
+.bg-msg{
+  background-color: #296EFF !important;
+  color: #fff !important;
+}
+
+.chat-page .msg{
+  transition: all 0.2s;
+}
+
+.chat-page .msg:hover{
+  opacity: 80%;
+}
