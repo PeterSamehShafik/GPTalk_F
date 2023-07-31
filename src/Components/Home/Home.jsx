@@ -33,14 +33,14 @@ export default function Home({ currentUser }) {
 
   }
   return (
-    <div className='bg-main h-100'>
+    <div className='bg-main h-100 p-4'>
       <div className="container">
-        <h1>Welcome {currentUser?.userName} to GPTalk!</h1>
+        <h1>Welcome <span className='text-capitalize'>{currentUser?.userName}</span> to GPTalk!</h1>
         <h2>Your ID is: {currentUser?._id}</h2>
 
         <label htmlFor="newChat">Join New Chat</label>
         <input className='form-control' type="text" id='newChat' placeholder="Type the User's ID..." />
-        <button onClick={joinChat} className='btn btn-primary ms-auto my-2 '>{join ? "loading..." : "Join"}</button>
+        <button onClick={joinChat} className='btn btn-outline-primary p-3 ms-auto my-3 '>{join ? "loading..." : "Join"}</button>
       </div>
     </div>
   )

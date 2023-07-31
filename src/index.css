@@ -7,8 +7,9 @@
 .light-mode, .dark-mode{
     transition: all 0.3s ease-in-out;
 }
-.light-mode .bg-main{
+.light-mode .bg-main, .light-mode .MuiListItem-root{
     background-color: #fff !important;
+    
 }
 .light-mode .bg-chat{
     background-color: #cfcbcb !important;
@@ -16,8 +17,9 @@
 .light-mode .bg-nav{
     background-color: #e7e7e7 !important;
 }
-.dark-mode .bg-main{
+.dark-mode .bg-main,.dark-mode .MuiListItem-root{
     background-color: #303030 !important;
+    color: white !important;
 }
 .dark-mode .bg-chat{
     background-color: #222222 !important;

@@ -12,7 +12,6 @@ import ChatPage from './Components/Chats/ChatPage.jsx';
 
 function App() {
   const [mode, setMode] = useState('light')
-
   const navigate = useNavigate()
 
 
@@ -75,10 +74,16 @@ function App() {
   }
 
   const darkMode = () => {
-    mode === 'light' ? setMode("dark") : setMode("light")
-    const app = document.getElementById("app")
-    app.classList.toggle("dark-mode")
-    app.classList.toggle("light-mode")
+    const app = document.getElementsByTagName("body")[0]
+    if (mode === 'light') {
+      setMode("dark")
+      app.classList.add("dark-mode")
+      app.classList.remove("light-mode")
+    } else {
+      setMode("light")
+      app.classList.add("light-mode")
+      app.classList.remove("dark-mode")
+    }
   }
 
   useEffect(() => {
@@ -88,7 +93,7 @@ function App() {
     }
   }, [])
   return (
-    <div className="App light-mode" id="app">
+    <div className="App" id="app">
       <div className='container-fluid p-0'>
         <div className='my-row d-flex'>
 
@@ -100,10 +105,20 @@ function App() {
           <main className='col-11-half p-0'>
             <Routes>
               <Route path='' element={<ProtectedRoute><Home currentUser={currentUser} /></ProtectedRoute>} />
-              <Route path='/chats' element={<ProtectedRoute><Chats currentUser={currentUser}/></ProtectedRoute>}>
+              <Route path='/chats' element={<ProtectedRoute><Chats currentUser={currentUser} /></ProtectedRoute>}>
                 <Route
                   path=""
-                  element={<div>Enter your chat </div>}
+                  element={<>
+                    <div className='mt-3 ms-3' >
+                    <span className='fa-xl'>Enter your chat now!</span>
+                    </div>
+                    <div className='position-relative top-50'>
+                      <div className="loader"></div>
+                      <div className="loader2"></div>
+                      <div className="loader3"></div>
+
+                    </div>
+                  </>}
                 />
                 <Route
                   path=":id"

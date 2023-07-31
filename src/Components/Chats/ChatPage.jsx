@@ -13,6 +13,7 @@ export default function ChatPage({ currentUser }) {
 
 
     const getMessages = async () => { //display chat
+
         socket.emit("joinRoom", id)
         const config = {
             headers: {
@@ -37,12 +38,20 @@ export default function ChatPage({ currentUser }) {
         }
 
     }
-    const sendMessage = async (e) => {
+
+    const checkNewLine = (e) => {
+        const keyCode = e.which || e.keyCode;
+        // 13 represents the Enter key
+        if (keyCode === 13 && !e.shiftKey) {
+            sendMessage()
+        }
+    }
+    const sendMessage = async () => {
+        // e.preventDefault()
 
         const msg = document.getElementById("msg")
         socket.emit("sendMessage", id)
 
-        e.preventDefault()
         const config = {
             headers: {
                 authorization: process.env.REACT_APP_BEARER_KEY + localStorage.getItem("token"),
@@ -52,7 +61,9 @@ export default function ChatPage({ currentUser }) {
             text: msg.value,
             recipientId: recipient._id
         }
-        msg.value = ""
+        msg.value = 'loading...'
+        msg.classList.add('opacity-50')
+        msg.disabled = true
         const result = await axios.post(`${process.env.REACT_APP_BASE_URL}/message/${id}/send/`, data, config).catch(function (error) {
             if (error.response) {
                 console.log(error.response);
@@ -61,12 +72,22 @@ export default function ChatPage({ currentUser }) {
         });
 
         if (result?.data?.message === "done") {
-            getMessages()
+            await getMessages()
+            getChats()
+            let element = document.querySelector('.chat-page');
+            if (element) {
+                element.scrollTop = element.scrollHeight;
+            }
+            msg.value = ''
+            msg.classList.remove('opacity-50')
+            msg.disabled = false
+
         } else {
             console.log("went wrong")
         }
 
     }
+
     let element = document.querySelector('.chat-page');
     if (element) {
         element.scrollTop = element.scrollHeight;
@@ -76,8 +97,8 @@ export default function ChatPage({ currentUser }) {
         getMessages()
     }, [])
 
-    useEffect(() => {    
-        socket.on("displayChat", async() => {            
+    useEffect(() => {
+        socket.on("displayChat", async () => {
             await getMessages()
             await getChats()
         })
@@ -105,7 +126,7 @@ export default function ChatPage({ currentUser }) {
                         return <div key={msg._id} className="my-message msg p-1 py-2 ">
                             <div className="d-flex align-items-center bg-chat p-2 rounded-2 justify-content-end">
                                 <span className='opacity-50 me-auto '>{new Date(msg.createdAt).getHours() > 12 ? new Date(msg.createdAt).getHours() - 12 : new Date(msg.createdAt).getHours()}{":" + (new Date(msg.createdAt).getMinutes() + 1)} {new Date(msg.createdAt).getHours() > 12 ? "PM" : "AM"}</span>
-                                <span className='me-2 bg-msg p-2 rounded'>{msg.text}</span>
+                                <p className='message-text me-2 bg-msg p-2 rounded'>{msg.text}</p>
                                 <Avatar>{currentUser.userName[0]}</Avatar>
                             </div>
                         </div>
@@ -113,7 +134,7 @@ export default function ChatPage({ currentUser }) {
                         return <div key={msg._id} className="out-message msg  p-1 py-2">
                             <div className="d-flex align-items-center bg-chat p-2 rounded-2">
                                 <Avatar>{msg.recipient.userName[0]}</Avatar>
-                                <span className='ms-2 bg-main p-2 rounded'>{msg.text}</span>
+                                <p className='message-text ms-2 bg-main p-2 rounded'>{msg.text}</p>
                                 <span className='opacity-50 ms-auto '>{new Date(msg.createdAt).getHours() > 12 ? new Date(msg.createdAt).getHours() - 12 : new Date(msg.createdAt).getHours()}{":" + (new Date(msg.createdAt).getMinutes() + 1)} {new Date(msg.createdAt).getHours() > 12 ? "PM" : "AM"}</span>
                             </div>
                         </div>
@@ -124,8 +145,9 @@ export default function ChatPage({ currentUser }) {
             </div>
             <div className="sender bg-main p-3 pb-1">
                 <div className="input-group pb-3">
-                    <form className='w-100' onSubmit={sendMessage}>
-                        <input id="msg" type="search" className="form-control bg-chat rounded-end" placeholder="Type your message..." aria-label="Search" aria-describedby="search-addon" />
+                    <form className='w-100' onSubmit={(event) => { event.preventDefault() }} >
+                        {/* onSubmit={sendMessage} */}
+                        <textarea id="msg" onKeyDown={checkNewLine} type="search" className="form-control bg-chat rounded-end" placeholder="Type your message..." aria-label="Search" aria-describedby="search-addon" />
 
                     </form>
                 </div>
