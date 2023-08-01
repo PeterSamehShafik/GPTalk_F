@@ -25,7 +25,7 @@ export default function Home({ currentUser }) {
       }
     });
     if (result?.data?.message == "done") {
-      console.log(result.data)
+      // console.log(result.data)
       setJoin(false)
 
       navigate(`/chats/${result.data.conversation._id}`);
