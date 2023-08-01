@@ -67,7 +67,10 @@ export default function Chats({ currentUser }) {
                 <div className="section-chat">
                   {chats === "loading" ? <div className='text-center fa-xl mt-2 pt-4'><span>Loading...</span></div> :
                     chats === null ? <div><span>Something went wrong...</span></div> :
-                      chats.length === 0 ? <div><span>Time to make new chats!</span></div> :
+                      chats.length === 0 ? <div className='text-center'>
+                        <span>Time to make new chats NOW!</span>
+                        <Link to='/home'><button className='btn btn-outline-info mt-2'>Join Chats!</button></Link>
+                        </div> :
                         chats.map((chat) => {                          
                           return <Link to={`${chat._id}`} key={chat._id} className="single-chat rounded-2 my-1 py-2 d-flex align-items-center justify-content-between">
                             <div className="avatar-name d-flex">

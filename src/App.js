@@ -104,13 +104,14 @@ function App() {
 
           <main className='col-11-half p-0'>
             <Routes>
-              <Route path='' element={<ProtectedRoute><Home currentUser={currentUser} /></ProtectedRoute>} />
+              <Route path='' element={<Navigate to='/home' />} />
+              <Route path='/home' element={<ProtectedRoute> <Home currentUser={currentUser}/></ProtectedRoute>} />
               <Route path='/chats' element={<ProtectedRoute><Chats currentUser={currentUser} /></ProtectedRoute>}>
                 <Route
                   path=""
                   element={<>
                     <div className='mt-3 ms-3' >
-                    <span className='fa-xl'>Enter your chat now!</span>
+                      <span className='fa-xl'>Enter your chat!</span>
                     </div>
                     <div className='position-relative top-50'>
                       <div className="loader"></div>

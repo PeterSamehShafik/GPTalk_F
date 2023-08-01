@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import "./Home.css"
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 export default function Home({ currentUser }) {
   const [join, setJoin] = useState(false)
@@ -33,15 +36,49 @@ export default function Home({ currentUser }) {
 
   }
   return (
-    <div className='bg-main h-100 p-4'>
-      <div className="container">
-        <h1>Welcome <span className='text-capitalize'>{currentUser?.userName}</span> to GPTalk!</h1>
-        <h2>Your ID is: {currentUser?._id}</h2>
+    <>
 
-        <label htmlFor="newChat">Join New Chat</label>
-        <input className='form-control' type="text" id='newChat' placeholder="Type the User's ID..." />
-        <button onClick={joinChat} className='btn btn-outline-primary p-3 ms-auto my-3 '>{join ? "loading..." : "Join"}</button>
-      </div>
-    </div>
+      {currentUser ?
+        <main className='bg-main vh-100 p-4 home'>
+          <div className="container" >
+            <div className="content d-flex flex-column justify-content-center">
+
+              <p className='welcome text-center'>
+                Welcome
+                <span>
+                  {currentUser?.userName}
+                </span>
+                &mdash; to GPTalk! &mdash;
+              </p>
+
+              <div className="home-content mt-2 border shadow p-5">
+                <h2>Your ID is: {currentUser?._id}</h2>
+                <label htmlFor="newChat">Join New Chat</label>
+                <input className='form-control' type="text" id='newChat' placeholder="Type the User's ID..." />
+                <Button
+                  onClick={joinChat}
+                  color="success" size="large"
+                  variant="contained" endIcon={<SendIcon />}>
+                  {join ? "loading..." : "Join"}
+                </Button>
+                <Link to='/chats'>
+                  <Button
+                    className='m-2'
+                    onClick={joinChat}
+                    color="secondary" size="large"
+                    variant="contained">
+                    Your Chats
+                  </Button>
+                </Link>
+
+              </div>
+            </div>
+          </div >
+        </main >
+        : "Loading..."
+      }
+
+    </>
+
   )
 }
