@@ -1,0 +1,75 @@
+.home {
+    position: relative;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.home::before {
+    content: "";
+    /* light */
+    background: rgb(238, 174, 202);
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100vh;
+    transform-origin: bottom;
+    transform: scaleY(4);
+}
+
+.dark-mode .home::before {
+    /* dark */
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}
+
+.home p {
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    border: 4px double rgba(255, 255, 255, 0.25);
+    border-width: 4px 0;
+}
+
+.home p span {
+    font: 700 3em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    display: block;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+    /* Clip Background Image */
+    background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Animate Background Image */
+    -webkit-text-fill-color: transparent;
+    animation: aitf 80s linear infinite;
+    /* Activate hardware acceleration for smoother animations */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+/* Animate Background Image */
+@keyframes aitf {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.home-content {
+    background: rgb(238, 174, 202);
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.dark-mode .home-content {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}

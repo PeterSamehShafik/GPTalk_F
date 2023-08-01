@@ -41,8 +41,8 @@ export default function Navbar({ darkMode, mode, currentUser, logout }) {
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center h-100">
                     {currentUser ? <>
-                        <Link to='/' onClick={() => setPathname("/")}>
-                            <div className={pathName === '/' ? "nav-item my-2  rounded-4 p-3 shadow-sm border active" : "nav-item my-2  rounded-4 p-3 shadow-sm border "}>
+                        <Link to='/home' onClick={() => setPathname("/home")}>
+                            <div className={pathName?.includes('home') ? "nav-item my-2  rounded-4 p-3 shadow-sm border active" : "nav-item my-2  rounded-4 p-3 shadow-sm border "}>
                                 <div className="opacity-75">
                                     <HomeIcon />
                                 </div>

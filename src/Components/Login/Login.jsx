@@ -96,7 +96,7 @@ export default function Login({validateLogin}) {
             setAPIRes(null);
             localStorage.setItem("token", result?.data.token);
             validateLogin()
-            navigate("/chats");
+            navigate("/home");
         }
     }
 
